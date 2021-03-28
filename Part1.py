@@ -25,18 +25,18 @@ train_datagen = ImageDataGenerator(
         height_shift_range=0.10,  
         horizontal_flip=True)
 
-test_datagen = ImageDataGenerator(rescale=1./255)
+val_datagen = ImageDataGenerator(rescale=1./255)
 
 training_set = train_datagen.flow_from_directory(
     'Dataset/train',
     target_size=(64,64),
-    batch_size=15,
+    batch_size=10,
     class_mode='input')
 
-test_set = test_datagen.flow_from_directory(
-    'Dataset/test',
+val_set = val_datagen.flow_from_directory(
+    'Dataset/validation',
     target_size=(64,64),
-    batch_size=15,
+    batch_size=10,
     class_mode='input')
 
 # %%
@@ -58,11 +58,11 @@ with tf.device('/GPU:0'):
     history = model.fit(
         training_set,
         steps_per_epoch=591//10,
-        batch_size=32, 
         epochs=100, 
         verbose=1,
-        validation_data=test_set,
-        validation_steps=266//10,
-        callbacks=[callback]
+        validation_data = val_set,
+        #validation_steps=266//10,
+        #callbacks=[callback]
     )
+    
 # %%
