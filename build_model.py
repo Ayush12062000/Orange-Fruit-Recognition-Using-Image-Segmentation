@@ -16,7 +16,7 @@ def classifier_model():
     # initializing the sequential model
     model = Sequential()
 
-    # adding first bolck of the model
+    # adding first block of the model
     
     model.add(Conv2D(32, (3,3), input_shape = (64,64,3), activation = 'relu' , kernel_initializer='random_normal'))
     model.add(Conv2D(32, (3, 3), activation = 'relu', kernel_initializer = 'random_normal'))
