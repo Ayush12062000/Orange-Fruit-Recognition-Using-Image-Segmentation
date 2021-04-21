@@ -16,7 +16,7 @@ def classifier_model():
     # initializing the sequential model
     model = Sequential()
 
-    # adding first block of the model
+    # adding first bolck of the model
     
     model.add(Conv2D(32, (3,3), input_shape = (64,64,3), activation = 'relu' , kernel_initializer='random_normal'))
     model.add(Conv2D(32, (3, 3), activation = 'relu', kernel_initializer = 'random_normal'))
@@ -51,6 +51,8 @@ def classifier_model():
     # adding the output layer
     model.add(Dense(1, activation='sigmoid' , kernel_initializer='random_normal'))
 
+    # model compilation + optimizer and loss function specifications.
+    # opt = keras.optimizers.Adam(learning_rate=0.01)
 
     model.compile(loss = 'binary_crossentropy', optimizer = 'adam', metrics=['accuracy'])
 
