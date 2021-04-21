@@ -51,10 +51,8 @@ def classifier_model():
     # adding the output layer
     model.add(Dense(1, activation='sigmoid' , kernel_initializer='random_normal'))
 
-    # model compilation + optimizer and loss function specifications.
-    opt = keras.optimizers.Adam(learning_rate=0.01)
 
-    model.compile(loss = 'binary_crossentropy', optimizer = opt, metrics=['accuracy'])
+    model.compile(loss = 'binary_crossentropy', optimizer = 'adam', metrics=['accuracy'])
 
     return model
 
