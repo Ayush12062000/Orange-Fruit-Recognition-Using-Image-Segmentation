@@ -38,15 +38,20 @@ dataset (0=Not Orange, 1=Orange).
 * Matplotlib: for creating static, animated, and interactive visualizations
 
 ## Setup
+
 1. First Clone the repository.
-2. Create and activate the virtual environment for the project.
-	```	
-	$ python -m venv Project_emotion
-	$ Project_emotion\Scripts\activate.bat
-	```
-3. Install the required packages using requirements.txt inside the environemnt using pip.
-	```
-	$ pip install -r requirements.txt
-	```
-4. run the Orange_Fruit_Part1.ipynb in google colab (make sure GPU/TPU is enabled).
+2. If you are working on your local Machine then:-
+	* Create and activate the virtual environment for the project.
+		```	
+		$ python -m venv Project_emotion
+		$ Project_emotion\Scripts\activate.bat
+		```
+	* Install the required packages using requirements.txt inside the environemnt using pip.
+		```
+		$ pip install -r requirements.txt
+		```
+	* Code Orange_Fruit_Part1.ipynb and build_model.py in your local machine.
+3. If you want to work on Google Colab then:-
+	* Upload Dataset, build_model.py, Orange_Fruit_Part1.ipynb, and Images Folder in you drive.
+	* Run the Orange_Fruit_Part1.ipynb in google colab (make sure GPU/TPU is enabled).
 
