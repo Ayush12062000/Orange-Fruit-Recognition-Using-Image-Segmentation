@@ -1,14 +1,9 @@
 #%%
-try:
-    import sys,os
-    import tensorflow as tf
-    import numpy as np
-    import pandas as pd
-    from build_model import classifier_model
-    print("----Libraries Loaded----")
-except:
-    print("----Libraries Not Loaded----")
-
+import sys,os
+import tensorflow as tf
+import numpy as np
+import pandas as pd
+from build_model import classifier_model
 #%%
 os.listdir()
 
