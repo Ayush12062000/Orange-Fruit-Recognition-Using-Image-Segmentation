@@ -18,8 +18,8 @@ os.listdir()
 #%%
 
 
-TRAIN_PATH = 'stage1_train/'
-TEST_PATH = 'stage1_test/'
+TRAIN_PATH = 'E:/Projects 6th SEM/Orange-Fruit-Recognition-Using-Image-Segmentation/Image Segmentaion/train_data/'
+TEST_PATH = 'E:/Projects 6th SEM/Orange-Fruit-Recognition-Using-Image-Segmentation/Image Segmentaion/test_data/'
 
 train_ids = next(os.walk(TRAIN_PATH))[1]
 test_ids = next(os.walk(TEST_PATH))[1]
