@@ -16,6 +16,9 @@ os.listdir()
 
 #%%
 
+seed = 42
+np.random.seed = seed
+
 IMG_WIDTH = 128
 IMG_HEIGHT = 128
 IMG_CHANNELS = 3
@@ -57,7 +60,7 @@ sizes_test = []
 print('Resizing test images') 
 for n, id_ in tqdm(enumerate(test_ids), total=len(test_ids)):
     path = TEST_PATH + id_
-    img = imread(path + '/images/' + id_ + '.png')[:,:,:IMG_CHANNELS]
+    img = imread(path + '/images/' + id_ + '.jpg')[:,:,:IMG_CHANNELS]
     sizes_test.append([img.shape[0], img.shape[1]])
     img = resize(img, (IMG_HEIGHT, IMG_WIDTH), mode='constant', preserve_range=True)
     X_test[n] = img
@@ -138,14 +141,43 @@ model.summary()
 
 ################################
 #Modelcheckpoint
-checkpointer = tf.keras.callbacks.ModelCheckpoint('model_for_Orange.h5', verbose=1, save_best_only=True)
 
-callbacks = [
-        tf.keras.callbacks.EarlyStopping(patience=3, monitor='val_loss'),
-        tf.keras.callbacks.TensorBoard(log_dir='logs')]
+with tf.device('/GPU:0'):
+    results = model.fit(X_train, Y_train, validation_split=0.1, batch_size=8, epochs=100)
 
-results = model.fit(X_train, Y_train, validation_split=0.1, batch_size=8, epochs=70, callbacks=callbacks)
 
+print('Training DONE')
+
+#%%
+plt.plot(results.history['accuracy'][0:150])
+plt.plot(results.history['val_accuracy'][0:150])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['training_accuracy', 'validation_accuracy'])
+plt.show()
+
+
+#%%
+plt.plot(results.history['loss'][0:150])
+plt.plot(results.history['val_loss'][0:150])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['training_loss', 'validation_loss'])
+plt.show()
+
+
+#%%
+# Saving model
+
+orange_model_json = model.to_json()  
+with open("model.json", "w") as json_file:  
+    json_file.write(orange_model_json)  
+model.save_weights("Orange_Fruit_Weights_segmentation2.h5")
+
+
+#%%
 ####################################
 
 idx = random.randint(0, len(X_train))
@@ -161,6 +193,7 @@ preds_val_t = (preds_val > 0.5).astype(np.uint8)
 preds_test_t = (preds_test > 0.5).astype(np.uint8)
 
 
+#%%
 # Perform a sanity check on some random training samples
 ix = random.randint(0, len(preds_train_t))
 imshow(X_train[ix])
@@ -178,3 +211,5 @@ imshow(np.squeeze(Y_train[int(Y_train.shape[0]*0.9):][ix]))
 plt.show()
 imshow(np.squeeze(preds_val_t[ix]))
 plt.show()
+
+# %%
