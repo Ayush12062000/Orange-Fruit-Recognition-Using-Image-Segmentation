@@ -133,21 +133,6 @@ with open("Segmentation_model.json", "w") as json_file:
 model.save_weights("Orange_Fruit_Weights_segmentation.h5")
 
 
-#%%
-# Loading Classification Model
-
-import Prediction_file as pf
-classification_model = pf.Loading_Model()
-
-#%%
-# Prediction
-
-path1 = 'Images/kiwi.jpg'
-path2 = 'Images/Orange.jpg'
-
-pred1 = pf.predicting(path1,classification_model)
-pred2 = pf.predicting(path2,classification_model)
-
 
 #%%
 # Loading Unet
@@ -158,7 +143,7 @@ segmentation_model.load_weights('Orange_Fruit_Weights_segmentation.h5')
 ####################################
 
 idx = random.randint(0, len(X_train))
-
+print(idx)
 
 preds_train = model.predict(X_train[:int(X_train.shape[0]*0.9)], verbose=1)
 preds_val = model.predict(X_train[int(X_train.shape[0]*0.9):], verbose=1)
@@ -187,6 +172,45 @@ plt.show()
 imshow(np.squeeze(Y_train[int(Y_train.shape[0]*0.9):][ix]))
 plt.show()
 imshow(np.squeeze(preds_val_t[ix]))
+plt.show()
+
+#%%
+# Loading Classification Model
+
+import Prediction_file as pf
+classification_model = pf.Loading_Model()
+
+#%%
+# Prediction
+
+path1 = 'Images/kiwi.jpg'
+path2 = 'Images/Orange.jpg'
+
+pred1 = pf.predicting(path1,classification_model)
+pred2 = pf.predicting(path2,classification_model)
+
+
+
+# %%
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
+def process_image(path):
+    img = load_img(path, target_size = (IMG_WIDTH,IMG_HEIGHT))
+    img_tensor = img_to_array(img)
+    img_tensor = np.expand_dims(img_tensor, axis = 0)
+    img_tensor/=255.0
+    return img_tensor
+
+if pred2 > 0.5:
+    p = segmentation_model.predict(process_image(path2), verbose=1)
+    p_t = (p > 0.5).astype(np.uint8)
+    imshow(np.squeeze(p_t))
+    plt.show()
+    
+
+# %%
+p = segmentation_model.predict(process_image(path1), verbose=1)
+p_t = (p > 0.5).astype(np.uint8)
+imshow(np.squeeze(p_t))
 plt.show()
 
 # %%

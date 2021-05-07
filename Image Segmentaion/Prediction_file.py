@@ -17,7 +17,6 @@ def Loading_Model():
 # Loading and Processing image
 def predicting(path,model):
     
-    result = False
     def process_image(path):
         img = load_img(path, target_size = (64,64))
         img_tensor = img_to_array(img)
@@ -26,12 +25,11 @@ def predicting(path,model):
         return img_tensor
     img_original1 = load_img(path)
     pred = model.predict(process_image(path))
-
     def show(pred,img):
         if pred>0.5: 
             str = '--------------Orange--------------'
-            result = True
-        else: str = '--------------Not Orange--------------'
+        else:
+            str = '--------------Not Orange--------------'
         plt.imshow(img)
         plt.axis('off')
         plt.title(str)
@@ -39,4 +37,4 @@ def predicting(path,model):
     
     show(pred,img_original1)
     
-    return result
+    return pred
