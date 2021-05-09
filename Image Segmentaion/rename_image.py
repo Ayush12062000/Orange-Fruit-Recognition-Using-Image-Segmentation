@@ -3,7 +3,7 @@ import os
 
 #%%
 # for train data
-os.chdir('E:/Projects 6th SEM/Orange Fruit Resources/train_data')
+os.chdir('E:/Projects 6th SEM/Orange-Fruit-Recognition-Using-Image-Segmentation/Image Segmentaion/train_data')
 
 # for test data
 # os.chdir('E:/Projects 6th SEM/Orange Fruit Resources/test_data')
