@@ -96,7 +96,7 @@ model.summary()
 #Modelcheckpoint
 
 with tf.device('/GPU:0'):
-    results = model.fit(X_train, Y_train, validation_split=0.1, batch_size=8, epochs=100)
+    results = model.fit(X_train, Y_train, validation_split=0.1, batch_size=4, epochs=100)
 
 
 print('Training DONE')
@@ -141,21 +141,22 @@ segmentation_model.load_weights('Orange_Fruit_Weights_segmentation.h5')
 
 #%%
 ####################################
-
+'''
 idx = random.randint(0, len(X_train))
 print(idx)
 
-preds_train = model.predict(X_train[:int(X_train.shape[0]*0.9)], verbose=1)
-preds_val = model.predict(X_train[int(X_train.shape[0]*0.9):], verbose=1)
-preds_test = model.predict(X_test, verbose=1)
+preds_train = segmentation_model.predict(X_train[:int(X_train.shape[0]*0.9)], verbose=1)
+preds_val = segmentation_model.predict(X_train[int(X_train.shape[0]*0.9):], verbose=1)
+preds_test = segmentation_model.predict(X_test, verbose=1)
 
  
 preds_train_t = (preds_train > 0.5).astype(np.uint8)
 preds_val_t = (preds_val > 0.5).astype(np.uint8)
 preds_test_t = (preds_test > 0.5).astype(np.uint8)
-
+'''
 
 #%%
+'''
 # Perform a sanity check on some random training samples
 ix = random.randint(0, len(preds_train_t))
 imshow(X_train[ix])
@@ -173,23 +174,31 @@ imshow(np.squeeze(Y_train[int(Y_train.shape[0]*0.9):][ix]))
 plt.show()
 imshow(np.squeeze(preds_val_t[ix]))
 plt.show()
-
+'''
 #%%
 # Loading Classification Model
 
 import Prediction_file as pf
 classification_model = pf.Loading_Model()
 
+
 #%%
 # Prediction
 
-path1 = 'Images/kiwi.jpg'
-path2 = 'Images/Orange.jpg'
+path1 = 'Images/'
+name = 'xyz20.jpg'
+pred1 = pf.predicting(path1+name,classification_model)
 
-pred1 = pf.predicting(path1,classification_model)
-pred2 = pf.predicting(path2,classification_model)
-
-
+#%%
+def Lets_segment(model,name,trigger):
+    if trigger:
+        i = imread(path1+'output'+name+'.jpg')
+        imshow(i,cmap='viridis')
+    else:
+        p = model.predict(process_image(path1), verbose=1)
+        p_t = (p > 0.5).astype(np.uint8)
+        imshow(np.squeeze(p_t))
+        plt.show()
 
 # %%
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
@@ -200,17 +209,26 @@ def process_image(path):
     img_tensor/=255.0
     return img_tensor
 
-if pred2 > 0.5:
-    p = segmentation_model.predict(process_image(path2), verbose=1)
-    p_t = (p > 0.5).astype(np.uint8)
-    imshow(np.squeeze(p_t))
+if pred1 > 0.5:
+    Lets_segment(segmentation_model,'20',True)
     plt.show()
-    
+else:
+    print("----Further Process Stopped Since Orange Not Found----")
 
 # %%
+'''
 p = segmentation_model.predict(process_image(path1), verbose=1)
 p_t = (p > 0.5).astype(np.uint8)
 imshow(np.squeeze(p_t))
 plt.show()
 
+
+#%%
+im = imread('Images/xyz2.jpg')
+imshow(im)
+
+# %%
+i = imread('Show_/output2.jpg')
+imshow(i,cmap='viridis')
+'''
 # %%
