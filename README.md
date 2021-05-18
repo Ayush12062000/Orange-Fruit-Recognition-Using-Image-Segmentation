@@ -3,8 +3,7 @@
 
 ## Aim of the Project
 1. To identify Orange or Not. (Classification)
-2. Creation Of Bounding Box around the classified object(orange). (Classification  +  Localisation)
-3. Using that Localized portion for Segmenting Orange. (Image Segmentation)
+2. Using that Classified image for Segmenting Orange using UNet. (Image Segmentation)
 
 
 Note: Kindly do not push any changes to Main or Master Branch. Create a New Branch and push all the changes to that branch.
