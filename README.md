@@ -35,7 +35,8 @@ dataset (0=Not Orange, 1=Orange).
 * Pandas: library for data manipulation and analysis
 * Tensorflow: library for large numerical computations without keeping deep learning in mind
 * Keras: neural network library
-* Matplotlib: for creating static, animated, and interactive visualizations
+* Matplotlib: for creating static, animated, and interactive visualizations  
+* tkinter : for creating GUI
 
 ## Setup
 
