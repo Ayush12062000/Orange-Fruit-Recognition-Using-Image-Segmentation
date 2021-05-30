@@ -23,10 +23,12 @@ For the recognition of Orange fruit, Input image of the orange which is captured
 and Orange from that image will be segmented using different colors.
 
 ## Dataset
-The Dataset used is self created. You can download the dataset from here - 
-[Orange_Fruit_Dataset](https://github.com/Ayush12062000/Orange-Fruit-Recognition-Using-Image-Segmentation/tree/main/Dataset) , It
-contains 1062 images and 526 images in train and validation folders respectively. There are 2 classes/categories in this
-dataset (0=Not Orange, 1=Orange). 
+The Dataset used is self created. And two different datasets having 1588 and 295 samples of orange
+fruit and fruits other than orange are used. The first dataset contains 794 samples of orange
+fruit images and 794 images of fruits that are other than orange. Multiple fruits or vegetables
+apart from orange fruit images were used that is Apple, Banana, Guava and Pepper Orange,
+broccoli, Onion, Bitter gourd, etc. In the second dataset, a total set of 295 images are used and
+this dataset also contains images of oranges and there corresponding masks
 
 ## Languages or Frameworks Used
 * Python: language
