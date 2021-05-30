@@ -28,7 +28,7 @@ fruit and fruits other than orange are used. The first dataset contains 794 samp
 fruit images and 794 images of fruits that are other than orange. Multiple fruits or vegetables
 apart from orange fruit images were used that is Apple, Banana, Guava and Pepper Orange,
 broccoli, Onion, Bitter gourd, etc. In the second dataset, a total set of 295 images are used and
-this dataset also contains images of oranges and there corresponding masks
+this dataset also contains images of oranges and there corresponding masks.
 
 ## Languages or Frameworks Used
 * Python: language
@@ -51,8 +51,10 @@ this dataset also contains images of oranges and there corresponding masks
 		```
 		$ pip install -r requirements.txt
 		```
-	* Code Orange_Fruit_Part1.ipynb and build_model.py in your local machine.
+	* Code Orange_Fruit_Part1.ipynb and build_model.py in your local machine and save the model.
+	* Then, use that classifier to classify orange and send that image as input to UNet Model.
+	* code main.py and UNet_Model.py to get segmented orange.
 3. If you want to work on Google Colab then:-
-	* Upload Dataset, build_model.py, Orange_Fruit_Part1.ipynb, and Images Folder in you drive.
-	* Run the Orange_Fruit_Part1.ipynb in google colab (make sure GPU/TPU is enabled).
+	* Upload Dataset, train_data, test_data, build_model.py, Orange_Fruit_Part1.ipynb, main.py, UNet_Model.py and Images Folder in you drive.
+	* Run the Orange_Fruit_Part1.ipynb, and main.py in google colab (make sure GPU/TPU is enabled).
 
