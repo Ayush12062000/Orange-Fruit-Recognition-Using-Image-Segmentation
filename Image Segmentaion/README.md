@@ -1,2 +1,2 @@
 # Orange Fruit Recognition 
-> Detecting whether the fruit shown is Orange or Not Using Image Segmentation 
+> Given Image of Orange(from then CNN model) is then Segmented.
